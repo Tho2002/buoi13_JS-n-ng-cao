@@ -98,25 +98,72 @@
 //   console.log("sau 3 giây", promise);
 // }, 3000); ///chạy sau 3giây Promise {<fulfilled>: undefined}
 
-///fecth API dùng để gọi lên sever thông qua 1 âpi để lấy dữ liệu từ trên sever trả về
-//API là một url để cho phép FE có thể giao tiếp được với BE
-fetch("https://dummyjson.com/products") //call api backend
-  .then((response) => {
-    return response.json();
-  }) //chờ data BE chuyển đổi sang javascript
+// ///fecth API dùng để gọi lên sever thông qua 1 âpi để lấy dữ liệu từ trên sever trả về
+// //API là một url để cho phép FE có thể giao tiếp được với BE
+// fetch("https://dummyjson.com/products") //call api backend
+//   .then((response) => {
+//     return response.json();
+//   }) //chờ data BE chuyển đổi sang javascript
 
-  .then((data) => {
-    console.log(data.products);
-    const newArray = data.products.map((item) => {
-      return `<div>
-      <img src="${item.thumbnail}"  />
-      ${item.title}
-      ${item.price}$
+//   .then((data) => {
+//     console.log(data.products);
+//     const newArray = data.products.map((item) => {
+//       return `<div>
+//       <img src="${item.thumbnail}"  />
+//       ${item.title}
+//       ${item.price}$
 
-      </div>`;
-    });
+//       </div>`;
+//     });
 
-    const htmls = newArray.join("");
-    const productList = document.querySelector("#product-list");
-    productList.innerHTML = htmls;
-  });
+//     const htmls = newArray.join("");
+//     const productList = document.querySelector("#product-list");
+//     productList.innerHTML = htmls;
+//   });
+
+////4 Async/await
+//là một tính năng của JS giúp chúng ta làm việc với các hàm bất đồng bộ theo cách dễ hiêu hơn
+//được xây dựng trên promise
+//Async :khai báo một hàm bất đồng bộ
+//tự động biến đổi một hàm thông thường thành một promise ,từ khóa async được đặt trước 1 hàm
+//Await: Tạm dừng việc thực hiện các hàm async
+//khi được đặt trước một promise ,nó sẽ đợi cho đến khi Promise kết thúc và trả về kết quả
+//Await chỉ có thể được sử dụng bên trong các hàm async
+
+//cú pháp
+const fetchApi = async (api) => {
+  const respone = await fetch(api);
+  const data = await respone.json();
+  return data;
+};
+// fetchApi("https://dummyjson.com/products").then((data) => {
+//   console.log(data);
+// });
+
+//5 JSON sever
+// fetchApi("http://localhost:3000/products").then((data) => {
+//   console.log(data);
+//   const newArray = data.map((item) => {
+//     return `
+// <div>
+// <img src='${item.thumbnail}'/>
+// ${item.id}
+// ${item.title}
+// ${item.description}
+// ${item.price}$
+
+// </div>
+//     `;
+//   });
+//   const htmls = newArray.join("");
+//   const listphone = document.querySelector("#product-list");
+//   listphone.innerHTML = htmls;
+// });
+
+//5.2 POST MAN
+//Phương thức get :lấy ra 1 hay nhiều bản ghi
+
+//Phương thức post: tạo mới 1 bản ghi
+
+//Phương thức put
+//Phương thức delete
